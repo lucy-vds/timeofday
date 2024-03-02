@@ -24,9 +24,9 @@ class TimeOfDayTest {
 		assertEquals(705, timeofday.getMinutenSindsMiddernacht());
 		
 		timeofday.setMinutenSindsMiddernacht(90);
-		assertEquals(11, timeofday.getUren());
+		assertEquals(1, timeofday.getUren());
 		assertEquals(30, timeofday.getMinuten());
-		assertEquals(90, timeofday.getMinuten());
+		assertEquals(90, timeofday.getMinutenSindsMiddernacht());
 	}
 
 }

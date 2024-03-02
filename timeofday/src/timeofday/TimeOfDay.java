@@ -24,15 +24,17 @@ public class TimeOfDay {
 	private int uren;
 	private int minuten;
 	
-	public int getUren() { throw new RuntimeException("Not yet implemented"); }
+	public int getUren() {
 		return uren;
 	}
 	
-	public int getMinuten() { throw new RuntimeException("Not yet implemented"); }
+	public int getMinuten() {
 		return minuten;
 	}
 	
-	public int getMiutenSindsMiddernacht() { throw new RuntimeException("Not yet implemented"); }
+	public int getMinutenSindsMiddernacht() {
+		return uren * 60 + minuten;
+	}
 	
 	/**
 	 * Initialiseert dit object met de gegeven uren en minuten
@@ -87,14 +89,15 @@ public class TimeOfDay {
 	/**
 	 * Stelt de minuten sinds middernacht in op de gegeven waarde
 	 * 
-	 * @pre | 0 <= newMinutenSindsMiddernacht && newMinutenSindsMiddernacht <= 24 * 60
+	 * @pre | 0 <= nieuweMinutenSindsMiddernacht && nieuweMinutenSindsMiddernacht <= 24 * 60
 	 * 
 	 * @mutates | this
 	 * 
-	 * @post | getMinutenSindsMiddernacht() == newMinutenSindMiddernacht
+	 * @post | getMinutenSindsMiddernacht() == nieuweMinutenSindsMiddernacht
 	 */
 	public void setMinutenSindsMiddernacht(int nieuweMinutenSindsMiddernacht) {
-		
+		this.uren = nieuweMinutenSindsMiddernacht / 60;
+		this.minuten = nieuweMinutenSindsMiddernacht % 60;
 	}
 }
 
