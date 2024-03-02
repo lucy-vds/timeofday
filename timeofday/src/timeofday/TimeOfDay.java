@@ -1,7 +1,7 @@
 package timeofday;
 
 /**
- * Elke instantie slaat een tijdstip op, gegeven door een aantal uren sinds middernacht en een aantal minuten binnen het uur.
+ * Elke instantie stelt een tijdstip voor, gegeven door een aantal uren sinds middernacht en een aantal minuten binnen het uur.
  * 
  * @invar Het aantal uren ligt tussen 0 en 23
  * 		| 0 <= getUren() &&
@@ -10,6 +10,9 @@ package timeofday;
  * 		| 0 <= getMinuten() &&
  * 		| getMinuten() <= 59
  * @invar | getMinutenSindsMiddernacht() == getUren() * 60 + getMinuten()
+ * 
+ * @immutable 
+ * 
  */
 public class TimeOfDay {
 	
@@ -52,52 +55,17 @@ public class TimeOfDay {
 	}
 	
 	/**
-	 * Stelt het aantal uren in van de gegeven waarden
+	 * Return a new TimeOfDay object whose minutes are the given minutes and whose hours are this object's hours.
 	 * 
-	 * @throws IllegalArgumentException | 0 <= nieuweUren && nieuweUren <= 23
-	 * @mutates | this
-	 * @post Het aantal uren van dit object is gelijk aan de gegeven waarde
-	 * 		| getUren() == nieuweUren
-	 * @post Het aantal minuten blijft ongewijzigd
-	 * 		| getMinuten() == old(getMinuten())
+	 * @pre | 0 <= newMinutes && newMinutes < 60
+	 * @post | result != null
+	 * @post | result.getUren() == getUren()
+	 * @post | result.getMinuten() == newMinutes
 	 */
-	public void setUren(int nieuweUren) {
-		if (nieuweUren < 0)
-			throw new IllegalArgumentException("'nieuweUren' is less than 0");
-		if (nieuweUren > 23)
-			throw new IllegalArgumentException("'nieuweUren' is greater than 23")
-		this.minutenSindsMiddernacht = nieuweUren * 60 + getMinuten();
+	public TimeOfDay withMinutes(int newMinutes) {
+		throw new RuntimeException("not yet implemented");
 	}
 	
-	/**
-	 * Stelt het aantal minuten in van de gegeven waarden
-	 * 
-	 * @pre Het aantal minuten ligt tussen 0 en 59
-	 * 		| 0 <= nieuweMinuten &&
-	 * 		| nieuweMinuten <= 59
-	 * @mutates | this
-	 * @post Het aantal uren blijft ongewijzigd
-	 * 		| getUren() == old(getUren())
-	 * @post Het aantal minuten van dit object is gelijk aan de gegeven waarde
-	 * 		| getMinuten() == nieuweMinuten
-	 */
-	public void setMinuten(int nieuweMinuten) {
-		this.minutenSindsMiddernacht -= getMinuten();
-		this.minutenSindsMiddernacht += nieuweMinuten;
-	}
-	
-	/**
-	 * Stelt de minuten sinds middernacht in op de gegeven waarde
-	 * 
-	 * @pre | 0 <= nieuweMinutenSindsMiddernacht && nieuweMinutenSindsMiddernacht <= 24 * 60
-	 * 
-	 * @mutates | this
-	 * 
-	 * @post | getMinutenSindsMiddernacht() == nieuweMinutenSindsMiddernacht
-	 */
-	public void setMinutenSindsMiddernacht(int nieuweMinutenSindsMiddernacht) {
-		this.minutenSindsMiddernacht = nieuweMinutenSindsMiddernacht;
-	}
 }
 
 	

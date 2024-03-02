@@ -8,25 +8,20 @@ class TimeOfDayTest {
 
 	@Test
 	void test() {
-		TimeOfDay timeofday = new TimeOfDay(10,30);
-		assertEquals(10, timeofday.getUren());
-		assertEquals(30, timeofday.getMinuten());
-		assertEquals(630, timeofday.getMinutenSindsMiddernacht());
+		TimeOfDay tenThirty = new TimeOfDay(10,30);
+		assertEquals(10, tenThirty.getUren());
+		assertEquals(30, tenThirty.getMinuten());
+		assertEquals(630, tenThirty.getMinutenSindsMiddernacht());
 		
-		timeofday.setUren(11);
-		assertEquals(11, timeofday.getUren());
-		assertEquals(30, timeofday.getMinuten());
-		assertEquals(690, timeofday.getMinutenSindsMiddernacht());
+		TimeOfDay elevenThirty = new TimeOfDay(11, tenThirty.getMinuten());
+		assertEquals(11, elevenThirty.getUren());
+		assertEquals(30, elevenThirty.getMinuten());
+		assertEquals(690, elevenThirty.getMinutenSindsMiddernacht());
 		
-		timeofday.setMinuten(45);
-		assertEquals(11, timeofday.getUren());
-		assertEquals(45, timeofday.getMinuten());
-		assertEquals(705, timeofday.getMinutenSindsMiddernacht());
-		
-		timeofday.setMinutenSindsMiddernacht(90);
-		assertEquals(1, timeofday.getUren());
-		assertEquals(30, timeofday.getMinuten());
-		assertEquals(90, timeofday.getMinutenSindsMiddernacht());
+		TimeOfDay elevenFortyFive = elevenThirty.withMinutes(45);
+		assertEquals(11, elevenFortyFive.getUren());
+		assertEquals(45, elevenFortyFive.getMinuten());
+		assertEquals(705, elevenFortyFive.getMinutenSindsMiddernacht());
 	}
 
 }
