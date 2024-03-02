@@ -14,25 +14,21 @@ package timeofday;
 public class TimeOfDay {
 	
 	/**
-	 * @invar Het aantal uren ligt tussen 0 en 23.
-	 * 		| 0 <= uren &&
-	 * 		| uren <= 23
-	 * @invar Het aantal minuten ligt tussen 0 en 59.
-	 * 		| 0 <= minuten && 
-	 * 		| minuten <= 59
+	 * @invar | 0 <= minutenSindsMiddernacht && minutenSindsMiddernacht < 24*60
 	 */
-	private int uren;
-	private int minuten;
+	private int minutenSindsMiddernacht;
 	
-	public int getUren() { throw new RuntimeException("Not yet implemented"); }
-		return uren;
+	public int getUren() {
+		return minutenSindsMiddernacht / 60;
 	}
 	
-	public int getMinuten() { throw new RuntimeException("Not yet implemented"); }
-		return minuten;
+	public int getMinuten() {
+		return minutenSindsMiddernacht % 60;
 	}
 	
-	public int getMiutenSindsMiddernacht() { throw new RuntimeException("Not yet implemented"); }
+	public int getMinutenSindsMiddernacht() {
+		return minutenSindsMiddernacht;
+	}
 	
 	/**
 	 * Initialiseert dit object met de gegeven uren en minuten
@@ -48,8 +44,7 @@ public class TimeOfDay {
 	 * 		| getMinuten() == initiëleMinuten
 	 */
 	public TimeOfDay(int initiëleUren, int initiëleMinuten) {
-		this.uren = initiëleUren;
-		this.minuten = initiëleMinuten;
+		this.minutenSindsMiddernacht = initiëleUren * 60 + initiëleMinuten;
 	}
 	
 	/**
@@ -65,7 +60,7 @@ public class TimeOfDay {
 	 * 		| getMinuten() == old(getMinuten())
 	 */
 	public void setUren(int nieuweUren) {
-		this.uren = nieuweUren;
+		this.minutenSindsMiddernacht = nieuweUren * 60 + getMinuten();
 	}
 	
 	/**
@@ -81,20 +76,21 @@ public class TimeOfDay {
 	 * 		| getMinuten() == nieuweMinuten
 	 */
 	public void setMinuten(int nieuweMinuten) {
-		this.minuten = nieuweMinuten;
+		this.minutenSindsMiddernacht -= getMinuten();
+		this.minutenSindsMiddernacht += nieuweMinuten;
 	}
 	
 	/**
 	 * Stelt de minuten sinds middernacht in op de gegeven waarde
 	 * 
-	 * @pre | 0 <= newMinutenSindsMiddernacht && newMinutenSindsMiddernacht <= 24 * 60
+	 * @pre | 0 <= nieuweMinutenSindsMiddernacht && nieuweMinutenSindsMiddernacht <= 24 * 60
 	 * 
 	 * @mutates | this
 	 * 
-	 * @post | getMinutenSindsMiddernacht() == newMinutenSindMiddernacht
+	 * @post | getMinutenSindsMiddernacht() == nieuweMinutenSindsMiddernacht
 	 */
 	public void setMinutenSindsMiddernacht(int nieuweMinutenSindsMiddernacht) {
-		
+		this.minutenSindsMiddernacht = nieuweMinutenSindsMiddernacht;
 	}
 }
 
