@@ -32,27 +32,29 @@ public class TimeOfDay {
 	
 	/**
 	 * Initialiseert dit object met de gegeven uren en minuten
-	 * @pre Het aantal uren ligt tussen 0 en 23
-	 * 		| 0 <= initiëleUren &&
-	 * 		| initiëleUren <= 23
-	 * @pre Het aantal minuten ligt tussen 0 en 59
-	 * 		| 0 <= initiëleMinuten &&
-	 * 		| initiëleMinuten <= 59
+	 * 
+	 * @throws IllegalArgumentException | !(0 <= initiëleUren && initiëleUren <= 23)
+	 * @throws IllegalArgumentException | !(0 <= initiëleMinuten && initiëleMinuten <= 59)
+	 * 
 	 * @post Het uur van het nieuwe object is gelijk aan het gegeven uur.
 	 * 		| getUren() == initiëleUren
 	 * @post Het aantal minuten van het nieuwe object is gelijk aan de gegeven.
 	 * 		| getMinuten() == initiëleMinuten
 	 */
 	public TimeOfDay(int initiëleUren, int initiëleMinuten) {
+		if (initiëleUren < 0)
+			throw new IllegalArgumentException("'initialUren' is less then zero");
+		if (initiëleUren > 23)
+			throw new IllegalArgumentException("'InitiëleUren' is greater than 59");
+		if (initiëleMinuten < 0 || initiëleMinuten > 59)
+			throw new IllegalArgumentException("'InitëleMinuten' is out of range");
 		this.minutenSindsMiddernacht = initiëleUren * 60 + initiëleMinuten;
 	}
 	
 	/**
 	 * Stelt het aantal uren in van de gegeven waarden
 	 * 
-	 * @pre Het aantal uren ligt tussen 0 en 23
-	 * 		| 0 <= nieuweUren &&
-	 * 		| nieuweUren <= 23
+	 * @throws IllegalArgumentException | 0 <= nieuweUren && nieuweUren <= 23
 	 * @mutates | this
 	 * @post Het aantal uren van dit object is gelijk aan de gegeven waarde
 	 * 		| getUren() == nieuweUren
@@ -60,6 +62,10 @@ public class TimeOfDay {
 	 * 		| getMinuten() == old(getMinuten())
 	 */
 	public void setUren(int nieuweUren) {
+		if (nieuweUren < 0)
+			throw new IllegalArgumentException("'nieuweUren' is less than 0");
+		if (nieuweUren > 23)
+			throw new IllegalArgumentException("'nieuweUren' is greater than 23")
 		this.minutenSindsMiddernacht = nieuweUren * 60 + getMinuten();
 	}
 	
